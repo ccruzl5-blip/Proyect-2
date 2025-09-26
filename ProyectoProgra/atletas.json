@@ -1,0 +1,46 @@
+[
+  {
+    "nombre": "Roke con p",
+    "edad": 20,
+    "disciplina": "Levantamiento de pesas",
+    "departamento": "Izabal",
+    "entrenamientos": [
+      {
+        "fecha": "2024-08-22",
+        "tipo": "Peso muerto",
+        "valor": 300.0
+      },
+      {
+        "fecha": "2025-07-14",
+        "tipo": "Peso muerto",
+        "valor": 500.0
+      }
+    ]
+  },
+  {
+    "nombre": "josue",
+    "edad": 19,
+    "disciplina": "natacion",
+    "departamento": "guatemala",
+    "entrenamientos": [
+      {
+        "fecha": "2022-04-05",
+        "tipo": "5",
+        "valor": 10.0
+      }
+    ]
+  },
+  {
+    "nombre": "mau",
+    "edad": 25,
+    "disciplina": "natacion",
+    "departamento": "quiche",
+    "entrenamientos": [
+      {
+        "fecha": "2025-04-05",
+        "tipo": "agilidad",
+        "valor": 10.5
+      }
+    ]
+  }
+]

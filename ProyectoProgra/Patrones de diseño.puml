@@ -1,0 +1,80 @@
+@startuml
+
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+hide empty members
+
+title Diagrama de Clases - Sistema de Monitoreo de Atletas (con Patrón Singleton)
+
+
+class Main {
+  + {static} main(String[] args)
+}
+
+class RegistroAtletas {
+  - {static} instance: RegistroAtletas  <<Singleton>>
+  - atletas: List<Atleta>
+  - gson: Gson
+  --
+  - RegistroAtletas()  ' Constructor privado
+  + {static} getInstance(): RegistroAtletas
+  + agregarAtleta(Atleta)
+  + buscarAtleta(String): Atleta
+  + guardarDatos(String)
+  + cargarDatos(String)
+}
+
+class Atleta {
+  - nombre: String
+  - edad: int
+  - disciplina: String
+  - departamento: String
+  - entrenamientos: List<Entrenamiento>
+  + agregarEntrenamiento(Entrenamiento)
+}
+
+class Entrenamiento {
+  - fecha: LocalDate
+  - tipo: String
+  - valor: double
+}
+
+class RegistroEntrenamientos {
+  + registrarNuevaSesion(Atleta, LocalDate, String, double)
+}
+
+class HistorialEntrenamientos {
+  + mostrarHistorial(Atleta)
+}
+
+class Estadisticas {
+  + mostrarEstadisticas(Atleta)
+}
+
+class LocalDateAdapter <<(G,LightGray)>> {
+
+  + serialize(LocalDate, Type, JsonSerializationContext)
+  + deserialize(JsonElement, Type, JsonDeserializationContext): LocalDate
+}
+
+
+Main .up.> RegistroAtletas : <<usa>>
+Main .up.> RegistroEntrenamientos : <<usa>>
+Main .up.> HistorialEntrenamientos : <<usa>>
+Main .up.> Estadisticas : <<usa>>
+
+
+RegistroAtletas "1" o-- "0..*" Atleta
+
+Atleta "1" *-- "0..*" Entrenamiento
+
+
+RegistroEntrenamientos ..> Atleta : <<depende de>>
+HistorialEntrenamientos ..> Atleta : <<depende de>>
+Estadisticas ..> Atleta : <<depende de>>
+
+
+RegistroAtletas .> LocalDateAdapter : <<usa>>
+
+
+@enduml

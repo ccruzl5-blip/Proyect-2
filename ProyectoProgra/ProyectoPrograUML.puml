@@ -1,0 +1,68 @@
+@startuml
+skinparam ClassAttributeIconStyle none
+
+hide fields
+hide methods
+
+package org.example {
+
+    class Atleta {
+    }
+
+    class Entrenamiento {
+    }
+
+    class GestorDB {
+        + cargarAtletas()
+        + cargarEntrenamientosParaAtleta(idAtleta)
+    }
+
+    class RegistroAtletas {
+        + cargarDatosDesdeDB()
+    }
+
+    class RegistroEntrenamientos {
+    }
+
+    class HistorialEntrenamientos {
+    }
+
+    class Planilla {
+    }
+
+    class Estadisticas {
+    }
+
+    class LocalDateAdapter {
+    }
+
+    class Main {
+        + main(args) {static}
+    }
+
+
+
+    RegistroAtletas o-- GestorDB : usa
+
+
+    GestorDB ..> Atleta : retorna
+    GestorDB ..> Entrenamiento : retorna
+
+
+    Atleta "1" *-- "*" Entrenamiento
+
+
+    RegistroEntrenamientos "1" -- "*" Entrenamiento : gestiona
+
+
+    Main .down.> RegistroAtletas : inicia
+
+
+    Estadisticas .left.> Atleta : calcula
+    Estadisticas .left.> Entrenamiento : calcula
+
+
+    LocalDateAdapter ..> java.time.LocalDate
+
+}
+@enduml
